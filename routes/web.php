@@ -29,5 +29,6 @@ $router->group( ['prefix' => 'api', 'middleware' => 'auth'], function() use ($ro
     $router->get('notes','NoteController@index');
     $router->get('notes/{id}','NoteController@show');
     $router->post('notes','NoteController@create');
+    $router->put('notes/{id}','NoteController@update');
     $router->delete('notes/{id}', 'NoteController@destroy');
 });

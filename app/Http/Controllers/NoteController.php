@@ -88,10 +88,25 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    $this->validate($request, [
+        'title' => 'required',
+        'content' => 'required',
+    ]);
+
+    $note = Note::where('id', $id)
+                ->where('user_id', $request->user()->id)
+                ->firstOrFail();
+
+    $note->update($request->only('title','content'));
+
+    return response()->json([
+        'message' => 'Note updated successfully',
+        'data'    => $note
+    ]);
+}
+
 
     /**
      * Remove the specified resource from storage.

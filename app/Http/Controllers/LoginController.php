@@ -58,7 +58,7 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
-        $token = $request->header('Authorization');
+        $token = $request->bearerToken();
 
         if (!$token) {
         return response()->json([
